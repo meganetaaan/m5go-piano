@@ -7,3 +7,7 @@
   * ドレミ (Speaker.tone)
   * SDから読み出して再生 (Speaker.play)
   * ひも付けは、まずは固定値
+
+* MQTT
+  * tone
+  * play

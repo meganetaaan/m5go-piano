@@ -1,16 +1,17 @@
 // https://www.1ft-seabass.jp/memo/2018/05/10/m5stack-meets-nodered-with-mqtt/
 
+#include <WiFi.h>
 #include <WiFiClient.h>
 #include <PubSubClient.h>
 #include <M5Stack.h>
 #include <ArduinoJson.h>
  
 // Wi-FiのSSID
-char *ssid = "---------ssid---------";
+char *ssid = "elecom2g-a4632d";
 // Wi-Fiのパスワード
-char *password = "---------password ---------";
+char *password = "9puchd99i9aw";
 // MQTTの接続先のIP
-const char *endpoint = "---------endpoint---------";
+const char *endpoint = "192.168.2.109";
 // MQTTのポート
 const int port = 1883;
 // デバイスID
@@ -149,7 +150,7 @@ void loop() {
  
   // 5秒ごとにメッセージを飛ばす
   long now = millis();
-  if (now - messageSentAt > 5000) {
+  if (now - messageSentAt > 33) {
       messageSentAt = now;
       sprintf(pubMessage, "{\"count\": %d}", count++);
       Serial.print("Publishing message to topic ");
