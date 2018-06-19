@@ -7,26 +7,28 @@
  */
 
 #include <IRremote.h>
+#include <M5Stack.h>
 
 int RECV_PIN = 36;
 
 IRrecv irrecv(RECV_PIN);
-
 decode_results results;
 
 void setup()
 {
-  Serial.begin(115200);
-  // In case the interrupt driver crashes on setup, give a clue
-  // to the user what's going on.
-  Serial.println("Enabling IRin");
-  irrecv.enableIRIn(); // Start the receiver
-  Serial.println("Enabled IRin");
+  irrecv.enableIRIn();
+  M5.Lcd.setTextSize(4);
+  M5.begin();
 }
 
 void loop() {
   if (irrecv.decode(&results)) {
-    Serial.println(results.value, HEX);
+    if(results.value != 0xFFFFFFFF) {
+      Serial.println(results.value, HEX);
+      M5.Lcd.clear();
+      M5.Lcd.setCursor(0, 0);
+      M5.Lcd.println(results.value, HEX);
+    }
     irrecv.resume(); // Receive the next value
   }
   delay(100);
